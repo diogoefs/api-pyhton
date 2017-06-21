@@ -1,0 +1,24 @@
+---
+# Criar o container em prod
+
+ - name: testa o container
+   command: docker inspect api_prod
+   register: container
+   ignore_errors: yes
+
+ - name: stopar container antes da remocao
+   command: docker stop api_prod
+   when: container.rc == 0
+
+ - name: remover o container de homolog
+   command: docker rm api_prod
+   when: container.rc == 0
+
+ - name: cria novo container ambiente de prod nao eh transitorio
+   command: docker commit api_homolog api_img_prod        
+        
+ - name: Criando efetivamente novo container
+   command: docker run -dit --name api_prod --hostname api_prod -p 5555:5555 --restart always api_img_prod /bin/bash
+
+ - name: testa efetivamente se o deploy em homolog foi executado com sucesso
+   command: docker inspect api_prod

@@ -1,0 +1,22 @@
+--- 
+# Criar o container em homolog
+
+ - name: testa o container
+   command: docker inspect api_homolog
+   register: container 
+   ignore_errors: yes 
+ 
+ - name: stopar container antes da remocao
+   command: docker stop api_homolog
+   when: container.rc == 0 
+
+ - name: remover o container de homolog
+   command: docker rm api_homolog
+   when: container.rc == 0 
+
+ - name: cria novo container ambientes de homologs transitorios
+   command: docker run -dit --name api_homolog --hostname api_homolog -p 8080:8080 --restart always api_img_homolog /bin/bash
+
+ - name: testa efetivamente se o deploy em homolog foi executado com sucesso
+   command: docker inspect api_homolog
+

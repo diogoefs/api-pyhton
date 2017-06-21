@@ -1,0 +1,8 @@
+---
+# Playbook: Responsavel por chechar a aplicacao
+
+  - name: Checa a atualizacao em homolog
+    hosts: app
+   
+    tasks:
+        - include: docker.yml
