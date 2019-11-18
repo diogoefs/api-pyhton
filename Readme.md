@@ -1,4 +1,4 @@
-# O objetivo deste readme é explicar detalhamente a implementação do desafio proposto pelo HU
+# O objetivo deste readme é apenas por motivo de estudos
 
 	O projeto consiste em uma api rest que apenas "SIMULA" a criação e verificação de instâncias AWS (GET e POST via curl).
 	O fluxo de trabalho, de forma resumida e objetiva, dá-se da seguite forma:
